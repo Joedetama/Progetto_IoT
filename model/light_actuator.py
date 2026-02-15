@@ -1,5 +1,11 @@
 import json
 
+LEVEL_CONSUMPTION = {
+    "Low": 0.5,
+    "Medium": 1.0,
+    "High": 1.5
+}
+
 class LightActuatorDescriptor:
     def __init__(self):
         self.status = "OFF"
@@ -21,8 +27,7 @@ class LightActuatorDescriptor:
 
             if new_status == "ON":
                 # Uso intensity per descrivere l'intesità della luce
-                incremento = 0.5 if new_intensity == "Low" else 1.0 if new_intensity == "Medium" else 1.5
-                self.consumo_luce_counter += incremento
+                self.consumo_luce_counter += LEVEL_CONSUMPTION.get(new_intensity, 0.0)
 
             if self.consumo_luce_counter >= 10.0:
                 self.is_blocked = True

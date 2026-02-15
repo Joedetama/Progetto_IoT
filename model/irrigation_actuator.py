@@ -1,5 +1,11 @@
 import json
 
+LEVEL_CONSUMPTION = {
+    "Low": 0.5,
+    "Medium": 1.0,
+    "High": 1.5
+}
+
 class IrrigationActuatorDescriptor:
     def __init__(self):
         self.status = "OFF"
@@ -21,8 +27,7 @@ class IrrigationActuatorDescriptor:
 
             # Se l'acqua viene accesa (o era già accesa), incremento il counter
             if new_status == "ON":
-                incremento = 0.5 if new_level == "Low" else 1.0 if new_level == "Medium" else 1.5
-                self.consumo_acqua_counter += incremento
+                self.consumo_acqua_counter += LEVEL_CONSUMPTION.get(new_level, 0.0)
 
             # Controllo limite sicurezza
             if self.consumo_acqua_counter >= 10.0:
