@@ -33,7 +33,6 @@ class LightActuatorDescriptor:
                 self.is_blocked = True
                 self.status = "OFF"
                 self.intensity = "None"
-                print(f"LUCI BLOCCATE({self.consumo_luce_counter})")
             else:
                 self.status = new_status
                 self.intensity = new_intensity
