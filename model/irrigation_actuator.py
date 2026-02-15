@@ -34,7 +34,6 @@ class IrrigationActuatorDescriptor:
                 self.is_blocked = True
                 self.status = "OFF"
                 self.level = "None"
-                #print(f" IRRIGAZIONE BLOCCATA ({self.consumo_acqua_counter})")
             else:
                 self.status = new_status
                 self.level = new_level
