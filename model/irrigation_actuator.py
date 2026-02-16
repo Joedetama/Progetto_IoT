@@ -25,11 +25,11 @@ class IrrigationActuatorDescriptor:
             new_status = data.get("status", self.status)
             new_level = data.get("level", self.level)
 
-            # Se l'acqua viene accesa (o era già accesa), incremento il counter
+            # Se l'acqua viene accesa, incremento il counter
             if new_status == "ON":
                 self.consumo_acqua_counter += LEVEL_CONSUMPTION.get(new_level, 0.0)
 
-            # Controllo limite sicurezza
+            # Controllo sicurezza
             if self.consumo_acqua_counter >= 10.0:
                 self.is_blocked = True
                 self.status = "OFF"

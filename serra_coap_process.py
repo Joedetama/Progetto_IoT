@@ -16,7 +16,7 @@ from resources.light_resource_actuator import LightResource
 logging.basicConfig(level=logging.INFO)
 
 async def main():
-    # Creazione dell'albero delle risorse
+    # Creo le risorse
     root = resource.Site()
 
     root.add_resource(['temperature'], TemperatureSensorResource())
@@ -30,17 +30,16 @@ async def main():
     root.add_resource(['irrigation'], IrrigationResource())
     root.add_resource(['light_control'], LightResource())
     
-    # MODO CORRETTO: Creiamo il contesto del server e lo "aspettiamo"
     await aiocoap.Context.create_server_context(root, bind=('127.0.0.1', 5683))
     
     print("I Sensori sono pronti sulla porta 5683")
     
-    # Mantiene il server in esecuzione senza consumare CPU inutilmente
+    # Mantengo il server in esecuzione
     await asyncio.get_running_loop().create_future()
 
 if __name__ == "__main__":
     try:
-        # Questo comando gestisce correttamente il loop degli eventi
+        # Gestisce il loop degli eventi
         asyncio.run(main())
     except KeyboardInterrupt:
         print("\nServer arrestato dall'utente")

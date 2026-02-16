@@ -5,7 +5,7 @@ from aiocoap import *
 import json
 import time
 
-# Logging configurato su INFO per monitorare l'attività
+# Logging per monitorare l'attività
 
 logging.basicConfig(level=logging.INFO)
 
@@ -105,7 +105,7 @@ async def main():
             payload_senml = genera_senml(valori, c_irr, c_light).encode('utf-8')
             await protocol.request(Message(code=PUT, payload=payload_senml, uri='coap://127.0.0.1:5685/logger')).response
             
-            logging.info(f"Dati processati. Logger aggiornati ({time.strftime('%H:%M:%S')})")
+            logging.info(f"Dati aggiornati ({time.strftime('%H:%M:%S')})")
 
         except Exception as e:
             logging.error(f"Errore nel ciclo: {e}")
